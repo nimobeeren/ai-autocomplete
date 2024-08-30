@@ -10,7 +10,7 @@ function App() {
       return [];
     }
 
-    const session = await (window as any).ai.assistant.create({
+    const session = await window.ai.assistant.create({
       initialPrompts: [
         {
           role: "system",
