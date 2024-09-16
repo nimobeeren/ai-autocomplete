@@ -30,7 +30,7 @@ function App() {
       });
 
       console.log("start", value);
-      const result: string = await session.prompt(
+      const result = await session.prompt(
         `Generate autocomplete suggestions: ${value}`
       );
       // console.log("raw", result);
