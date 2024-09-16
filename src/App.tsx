@@ -56,14 +56,23 @@ function App() {
         }
         throw e;
       }
-      // console.log("raw", result);
-      const newSuggestions = result
-        .split("\n")
-        .map((suggestion) => suggestion.replace("*", "").trim().toLowerCase());
-      // console.log("parsed", newSuggestions);
-      console.log("end", value);
 
-      setSuggestions(newSuggestions);
+      console.log(`result\n${result}`);
+
+      setSuggestions(
+        result
+          .split("\n")
+          .map((suggestion) => suggestion.replaceAll("**", ""))
+          .filter((suggestion) => !suggestion.endsWith(":"))
+          .map((suggestion) =>
+            suggestion
+              .replace(/^\s*[*-]/, "")
+              .trim()
+              .toLowerCase()
+          )
+      );
+
+      console.log("end", value);
     };
     return debounce(func, 300);
   }, [oldAssistant]);
