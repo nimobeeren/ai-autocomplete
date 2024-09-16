@@ -2,25 +2,6 @@ import { debounce } from "lodash-es";
 import { useMemo, useState } from "react";
 import { Search } from "./search";
 
-async function createAssistant() {
-  return window.ai.assistant.create({
-    initialPrompts: [
-      {
-        role: "system",
-        content: "Generate autocomplete suggestions for the input query",
-      },
-      {
-        role: "user",
-        content: "Generate autocomplete suggestions: apple",
-      },
-      {
-        role: "assistant",
-        content: "* apple iphone\n* apple ipad\n* macbook pro",
-      },
-    ],
-  });
-}
-
 function App() {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
@@ -36,14 +17,15 @@ function App() {
         console.log("destroying assistant");
         oldAssistant.destroy();
       }
-      const assistant = await createAssistant();
+      const assistant = await window.ai.assistant.create();
       setOldAssistant(assistant);
 
       console.log("start", value);
-      let result;
+
+      let result: string;
       try {
         result = await assistant.prompt(
-          `Generate autocomplete suggestions: ${value}`
+          `Generate autocomplete suggestions for: ${value}`
         );
       } catch (e) {
         if (
