@@ -33,7 +33,7 @@ function App() {
           .map((suggestion) =>
             suggestion.replace(/[-*]/, "").replaceAll("**", "").trim()
           )
-          .filter((suggestion) => !suggestion.endsWith(":"))
+          .filter((suggestion) => suggestion && !suggestion.endsWith(":"))
       );
 
       console.log("end", value);
