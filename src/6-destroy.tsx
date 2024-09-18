@@ -16,6 +16,7 @@ function App() {
         (await window.ai?.assistant.capabilities())?.available !== "readily" ||
         !value.trim()
       ) {
+        setSuggestions([]);
         return;
       }
 

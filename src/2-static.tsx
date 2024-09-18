@@ -12,6 +12,7 @@ function App() {
       typeof window === "undefined" ||
       (await window.ai?.assistant.capabilities())?.available !== "readily"
     ) {
+      setSuggestions([]);
       return;
     }
 
