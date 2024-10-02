@@ -1,8 +1,8 @@
 // Stream results
 
+import { Search } from "@/components/search";
 import { debounce } from "lodash-es";
 import { useMemo, useRef, useState } from "react";
-import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");
@@ -30,7 +30,7 @@ function App() {
       assistantRef.current = assistant;
 
       const stream = assistant.promptStreaming(
-        `Generate autocomplete suggestions for: ${value}`
+        `Generate autocomplete suggestions for: ${value}`,
       );
 
       // NOTE: needs "dom.asynciterable" in tsconfig lib
@@ -40,9 +40,9 @@ function App() {
           chunk
             .split("\n")
             .map((suggestion) =>
-              suggestion.replace(/[-*]/, "").replaceAll("**", "").trim()
+              suggestion.replace(/[-*]/, "").replaceAll("**", "").trim(),
             )
-            .filter((suggestion) => suggestion && !suggestion.endsWith(":"))
+            .filter((suggestion) => suggestion && !suggestion.endsWith(":")),
         );
       }
 

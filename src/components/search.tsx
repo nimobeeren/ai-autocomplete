@@ -11,11 +11,7 @@ interface SearchInputProps {
   suggestions: string[];
 }
 
-export function Search({
-  value,
-  onChange,
-  suggestions,
-}: SearchInputProps) {
+export function Search({ value, onChange, suggestions }: SearchInputProps) {
   const [open, setOpen] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const suggestionsRef = React.useRef<HTMLUListElement>(null);

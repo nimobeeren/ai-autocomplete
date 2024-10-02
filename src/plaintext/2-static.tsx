@@ -1,7 +1,7 @@
 // Generate suggestions with static prompt
 
+import { Search } from "@/components/search";
 import { useEffect, useState } from "react";
-import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");
@@ -18,7 +18,7 @@ function App() {
 
     const assistant = await window.ai.assistant.create();
     const result = await assistant.prompt(
-      "Generate autocomplete suggestions for: fruit"
+      "Generate autocomplete suggestions for: fruit",
     );
 
     setSuggestions(result.split("\n"));

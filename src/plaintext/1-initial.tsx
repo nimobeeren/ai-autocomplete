@@ -1,7 +1,7 @@
 // Starting point
 
+import { Search } from "@/components/search";
 import { useState } from "react";
-import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");

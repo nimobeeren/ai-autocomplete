@@ -1,8 +1,8 @@
 // Add debounce
 
+import { Search } from "@/components/search";
 import { debounce } from "lodash-es";
 import { useMemo, useState } from "react";
-import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");
@@ -23,7 +23,7 @@ function App() {
 
       const assistant = await window.ai.assistant.create();
       const result = await assistant.prompt(
-        `Generate autocomplete suggestions for: ${value}`
+        `Generate autocomplete suggestions for: ${value}`,
       );
 
       console.log(`result\n${result}`);
@@ -32,9 +32,9 @@ function App() {
         result
           .split("\n")
           .map((suggestion) =>
-            suggestion.replace(/[-*]/, "").replaceAll("**", "").trim()
+            suggestion.replace(/[-*]/, "").replaceAll("**", "").trim(),
           )
-          .filter((suggestion) => suggestion && !suggestion.endsWith(":"))
+          .filter((suggestion) => suggestion && !suggestion.endsWith(":")),
       );
 
       console.log("end", value);

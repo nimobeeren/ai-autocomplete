@@ -1,7 +1,7 @@
 // Generate suggestions based on value
 
+import { Search } from "@/components/search";
 import { useState } from "react";
-import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");
@@ -21,7 +21,7 @@ function App() {
 
     const assistant = await window.ai.assistant.create();
     const result = await assistant.prompt(
-      `Generate autocomplete suggestions for: ${value}`
+      `Generate autocomplete suggestions for: ${value}`,
     );
 
     console.log(`result\n${result}`);
