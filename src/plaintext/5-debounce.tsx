@@ -2,7 +2,7 @@
 
 import { debounce } from "lodash-es";
 import { useMemo, useState } from "react";
-import { Search } from "./search";
+import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");

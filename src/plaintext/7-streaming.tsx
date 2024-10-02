@@ -1,8 +1,8 @@
-// Destroy old assistant
+// Stream results
 
 import { debounce } from "lodash-es";
 import { useMemo, useRef, useState } from "react";
-import { Search } from "./search";
+import { Search } from "../search";
 
 function App() {
   const [value, setValue] = useState("");
@@ -29,20 +29,22 @@ function App() {
       const assistant = await window.ai.assistant.create();
       assistantRef.current = assistant;
 
-      const result = await assistant.prompt(
+      const stream = assistant.promptStreaming(
         `Generate autocomplete suggestions for: ${value}`
       );
 
-      console.log(`result\n${result}`);
-
-      setSuggestions(
-        result
-          .split("\n")
-          .map((suggestion) =>
-            suggestion.replace(/[-*]/, "").replaceAll("**", "").trim()
-          )
-          .filter((suggestion) => suggestion && !suggestion.endsWith(":"))
-      );
+      // NOTE: needs "dom.asynciterable" in tsconfig lib
+      for await (const chunk of stream) {
+        console.log(`result\n${chunk}`);
+        setSuggestions(
+          chunk
+            .split("\n")
+            .map((suggestion) =>
+              suggestion.replace(/[-*]/, "").replaceAll("**", "").trim()
+            )
+            .filter((suggestion) => suggestion && !suggestion.endsWith(":"))
+        );
+      }
 
       console.log("end", value);
     }
