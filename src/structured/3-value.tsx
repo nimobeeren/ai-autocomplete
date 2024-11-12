@@ -10,7 +10,8 @@ function App() {
   async function generateSuggestions(value: string) {
     if (
       typeof window === "undefined" ||
-      (await window.ai?.assistant.capabilities())?.available !== "readily" ||
+      (await window.ai?.languageModel?.capabilities())?.available !==
+        "readily" ||
       value.trim().length < 3
     ) {
       setSuggestions([]);
@@ -19,9 +20,9 @@ function App() {
 
     console.log("start", value);
 
-    const session = await window.ai.assistant.create();
+    const session = await window.ai.languageModel.create();
     const result = await session.prompt(
-      `Generate autocomplete suggestions for: ${value}`,
+      `Generate 5 autocomplete suggestions for: ${value}`
     );
 
     console.log(`result\n${result}`);

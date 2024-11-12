@@ -11,7 +11,8 @@ function App() {
   const generateSuggestions = async (value: string) => {
     if (
       typeof window === "undefined" ||
-      (await window.ai?.assistant.capabilities())?.available !== "readily" ||
+      (await window.ai?.languageModel?.capabilities())?.available !==
+        "readily" ||
       value.trim().length < 3
     ) {
       setSuggestions([]);
@@ -20,7 +21,7 @@ function App() {
 
     console.log("start", value);
 
-    const session = await window.ai.assistant.create({
+    const session = await window.ai.languageModel.create({
       systemPrompt: `You are a shopping assistant for a tech store. Generate 5-10 autocomplete suggestions for the user query. Respond only with JSON and follow this schema: {"suggestions": string[]}`,
     });
     const result = await session.prompt(`User query: ${value}`);
@@ -38,7 +39,7 @@ function App() {
     }
 
     setSuggestions(
-      parsedSuggestions.filter((suggestion) => typeof suggestion === "string"),
+      parsedSuggestions.filter((suggestion) => typeof suggestion === "string")
     );
 
     console.log("end", value);

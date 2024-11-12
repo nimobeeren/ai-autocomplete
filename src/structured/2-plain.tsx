@@ -10,15 +10,15 @@ function App() {
   async function generateSuggestions() {
     if (
       typeof window === "undefined" ||
-      (await window.ai?.assistant.capabilities())?.available !== "readily"
+      (await window.ai?.languageModel?.capabilities())?.available !== "readily"
     ) {
       setSuggestions([]);
       return;
     }
 
-    const assistant = await window.ai.assistant.create();
-    const result = await assistant.prompt(
-      "Generate autocomplete suggestions for: fruit",
+    const session = await window.ai.languageModel.create();
+    const result = await session.prompt(
+      "Generate 5 autocomplete suggestions for: pizza"
     );
 
     setSuggestions(result.split("\n"));

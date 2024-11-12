@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
-    "@types/dom-chromium-ai": "^0.0.0",
+    "@types/dom-chromium-ai": "^0.0.2",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.5.1",
     "@types/react": "^18.3.3",
