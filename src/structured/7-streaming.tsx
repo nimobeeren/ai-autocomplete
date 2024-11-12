@@ -35,16 +35,11 @@ function App() {
 
     let parsedSuggestions;
     for await (const chunk of session.promptStreaming(`User query: ${value}`)) {
-      const json = chunk
-        .trim()
-        .replace(/^```json/i, "")
-        .replace(/```$/, "");
-
-      if (json.trim().length === 0) {
+      if (chunk.trim().length === 0) {
         continue;
       }
 
-      const parsed = parsePartial(json);
+      const parsed = parsePartial(chunk);
       parsedSuggestions = parsed.suggestions;
 
       if (!Array.isArray(parsedSuggestions)) {

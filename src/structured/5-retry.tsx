@@ -28,11 +28,7 @@ function App() {
 
     console.log(`result\n${result}`);
 
-    const json = result
-      .trim()
-      .replace(/^```json/i, "")
-      .replace(/```$/, "");
-    const parsedSuggestions = JSON.parse(json).suggestions;
+    const parsedSuggestions = JSON.parse(result).suggestions;
 
     if (!Array.isArray(parsedSuggestions)) {
       throw new Error("JSON did not conform to schema");
