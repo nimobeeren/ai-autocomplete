@@ -9,10 +9,9 @@ function App() {
 
   async function generateSuggestions(value: string) {
     if (
+      value.trim().length < 3 ||
       typeof window === "undefined" ||
-      (await window.ai?.languageModel?.capabilities())?.available !==
-        "readily" ||
-      value.trim().length < 3
+      (await window.ai?.languageModel?.capabilities())?.available !== "readily"
     ) {
       setSuggestions([]);
       return;
